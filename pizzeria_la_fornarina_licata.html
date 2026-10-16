@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzeria La Fornarina | Licata - La pizza più buona e soffice</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            red: '#C8381A',
+                            gold: '#D9A05B',
+                            dark: '#121212',
+                            card: '#1A1A1A',
+                            accent: '#E65100',
+                            justeat: '#F36D00'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gluten-free-badge {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+        .hero-overlay {
+            background: linear-gradient(180deg, rgba(18, 18, 18, 0.6) 0%, rgba(18, 18, 18, 0.95) 100%);
+        }
+        .pizza-card:hover {
+            transform: translateY(-4px);
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-gray-200 font-sans antialiased selection:bg-brand-gold selection:text-black">
+
+    <!-- TOP BAR INFO -->
+    <div class="bg-stone-900 border-b border-stone-800 text-xs sm:text-sm py-2 px-4">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center gap-4 text-gray-400">
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-brand-gold"></i> Licata (AG), Sicilia</span>
+                <span class="hidden md:flex items-center gap-1.5"><i class="fa-regular fa-clock text-brand-gold"></i> Mar - Dom: 17:00 - 23:30 (Lunedì Chiuso)</span>
+            </div>
+            <div class="flex items-center gap-4 ml-auto">
+                <a href="tel:+390922000000" class="flex items-center gap-1.5 text-brand-gold font-medium hover:underline">
+                    <i class="fa-solid fa-phone"></i> Ordina: 0922 123456
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="sticky top-0 z-50 bg-brand-dark/95 backdrop-blur-md border-b border-stone-800 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 rounded-full bg-brand-red/20 border border-brand-gold/40 flex items-center justify-center text-brand-gold text-2xl group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-pizza-slice"></i>
+                    </div>
+                    <div>
+                        <span class="font-serif text-2xl font-bold tracking-wide text-white block leading-none">LA FORNARINA</span>
+                        <span class="text-[10px] tracking-widest text-brand-gold uppercase font-medium">Pizzeria • Licata</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Navigation -->
+                <nav class="hidden lg:flex items-center gap-8 text-sm font-medium">
+                    <a href="#home" class="text-white hover:text-brand-gold transition-colors">Home</a>
+                    <a href="#chi-siamo" class="text-gray-300 hover:text-brand-gold transition-colors">Chi Siamo</a>
+                    <a href="#menu" class="text-gray-300 hover:text-brand-gold transition-colors">Il Menu</a>
+                    <a href="#gluten-free" class="text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition-colors">
+                        <i class="fa-solid fa-wheat-awn-circle-exclamation"></i> Gluten Free
+                    </a>
+                    <a href="#sale" class="text-gray-300 hover:text-brand-gold transition-colors">La Struttura</a>
+                    <a href="#contatti" class="text-gray-300 hover:text-brand-gold transition-colors">Contatti</a>
+                </nav>
+
+                <!-- Call to Action Buttons -->
+                <div class="hidden sm:flex items-center gap-3">
+                    <a href="https://www.just-eat.it" target="_blank" rel="noopener" class="bg-brand-justeat hover:bg-orange-600 text-white font-semibold text-xs uppercase px-4 py-2.5 rounded-full shadow-lg transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-utensils"></i> Just Eat
+                    </a>
+                    <a href="tel:+390922000000" class="bg-brand-red hover:bg-red-700 text-white font-semibold text-xs uppercase px-4 py-2.5 rounded-full shadow-lg transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-motorcycle"></i> Pizza Taxi
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="lg:hidden text-gray-300 hover:text-white p-2 rounded-lg focus:outline-none">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-stone-900 border-b border-stone-800 px-4 pt-2 pb-6 space-y-3">
+            <a href="#home" class="block py-2 text-white hover:text-brand-gold font-medium">Home</a>
+            <a href="#chi-siamo" class="block py-2 text-gray-300 hover:text-brand-gold font-medium">Chi Siamo</a>
+            <a href="#menu" class="block py-2 text-gray-300 hover:text-brand-gold font-medium">Il Menu</a>
+            <a href="#gluten-free" class="block py-2 text-emerald-400 font-medium">Senza Glutine 🌾❌</a>
+            <a href="#sale" class="block py-2 text-gray-300 hover:text-brand-gold font-medium">Le Sale & Veranda</a>
+            <a href="#contatti" class="block py-2 text-gray-300 hover:text-brand-gold font-medium">Contatti & Orari</a>
+            
+            <div class="pt-4 border-t border-stone-800 flex flex-col gap-2">
+                <a href="https://www.just-eat.it" target="_blank" class="w-full text-center bg-brand-justeat text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-bag-shopping"></i> Ordina su Just Eat
+                </a>
+                <a href="tel:+390922000000" class="w-full text-center bg-brand-red text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-phone"></i> Chiama Pizza Taxi (Domicilio)
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative min-h-[85vh] flex items-center justify-center bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1600&auto=format&fit=crop');">
+        <div class="absolute inset-0 hero-overlay"></div>
+        
+        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center py-20">
+            <!-- Badge Top -->
+            <div class="inline-flex items-center gap-2 bg-brand-gold/20 border border-brand-gold/40 text-brand-gold px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold tracking-wider uppercase mb-6 backdrop-blur-sm">
+                <i class="fa-solid fa-star"></i> Pizzeria d'Eccellenza a Licata
+            </div>
+            
+            <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight leading-tight mb-6">
+                La pizza più buona e <br><span class="text-brand-gold italic">soffice di Licata</span>
+            </h1>
+            
+            <p class="text-stone-300 text-lg sm:text-xl max-w-2xl mx-auto font-light mb-10 leading-relaxed">
+                Farine selezionate, lievitazione naturale ad alta digeribilità e solo ingredienti di prima qualità. Scoprila al tavolo o comoda a casa tua!
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-14">
+                <a href="#menu" class="w-full sm:w-auto bg-brand-red hover:bg-red-700 text-white font-bold text-base px-8 py-4 rounded-xl shadow-xl hover:shadow-red-900/30 transition-all flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-book-open"></i> Sfoglia il Menu
+                </a>
+                <a href="tel:+390922000000" class="w-full sm:w-auto bg-stone-800/80 hover:bg-stone-800 text-white border border-stone-600 font-bold text-base px-8 py-4 rounded-xl backdrop-blur-sm transition-all flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-phone"></i> Prenota un Tavolo
+                </a>
+            </div>
+
+            <!-- Highlights Badges -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-left max-w-4xl mx-auto">
+                <div class="bg-stone-900/80 border border-stone-800 p-3.5 rounded-xl backdrop-blur-sm flex items-center gap-3">
+                    <div class="text-emerald-400 text-2xl"><i class="fa-solid fa-wheat-awn-circle-exclamation"></i></div>
+                    <div>
+                        <h4 class="text-xs font-bold text-white">Menu Gluten Free</h4>
+                        <p class="text-[11px] text-gray-400">Pizze per Celiaci</p>
+                    </div>
+                </div>
+                <div class="bg-stone-900/80 border border-stone-800 p-3.5 rounded-xl backdrop-blur-sm flex items-center gap-3">
+                    <div class="text-brand-gold text-2xl"><i class="fa-solid fa-umbrella-beach"></i></div>
+                    <div>
+                        <h4 class="text-xs font-bold text-white">Veranda Esterna</h4>
+                        <p class="text-[11px] text-gray-400">Coperta e Accogliente</p>
+                    </div>
+                </div>
+                <div class="bg-stone-900/80 border border-stone-800 p-3.5 rounded-xl backdrop-blur-sm flex items-center gap-3">
+                    <div class="text-brand-red text-2xl"><i class="fa-solid fa-motorcycle"></i></div>
+                    <div>
+                        <h4 class="text-xs font-bold text-white">Pizza Taxi</h4>
+                        <p class="text-[11px] text-gray-400">Consegna a Domicilio</p>
+                    </div>
+                </div>
+                <div class="bg-stone-900/80 border border-stone-800 p-3.5 rounded-xl backdrop-blur-sm flex items-center gap-3">
+                    <div class="text-brand-justeat text-2xl"><i class="fa-solid fa-bag-shopping"></i></div>
+                    <div>
+                        <h4 class="text-xs font-bold text-white">Just Eat</h4>
+                        <p class="text-[11px] text-gray-400">Ordini online veloci</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CHI SIAMO / QUALITA' -->
+    <section id="chi-siamo" class="py-20 bg-stone-900 border-y border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Immagini Decorativi -->
+                <div class="relative">
+                    <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl border border-stone-700">
+                        <img src="https://images.unsplash.com/photo-1579751626657-72bc17010498?q=80&w=800&auto=format&fit=crop" alt="Pizzaiolo al lavoro" class="w-full h-[400px] object-cover">
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 w-2/3 rounded-2xl overflow-hidden shadow-2xl border-4 border-stone-900 hidden sm:block">
+                        <img src="https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?q=80&w=600&auto=format&fit=crop" alt="Pizza sfornata fresca" class="w-full h-[220px] object-cover">
+                    </div>
+                    <div class="absolute -top-4 -left-4 bg-brand-red text-white font-serif p-4 rounded-xl shadow-lg z-20 text-center">
+                        <span class="block text-3xl font-bold">100%</span>
+                        <span class="text-xs uppercase tracking-wider">Qualità & Sapore</span>
+                    </div>
+                </div>
+
+                <!-- Contenuto Testuale -->
+                <div class="space-y-6">
+                    <div class="inline-flex items-center gap-2 text-brand-gold text-xs font-bold uppercase tracking-widest">
+                        <i class="fa-solid fa-fire-flame-curved"></i> La Nostra Filosofia
+                    </div>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white leading-tight">
+                        Passione per gli ingredienti, maestria nell'impasto soffice.
+                    </h2>
+                    <p class="text-stone-300 leading-relaxed font-light">
+                        Alla <strong class="text-white font-semibold">Pizzeria La Fornarina</strong> di Licata ci dedichiamo ogni giorno alla ricerca dell'eccellenza. Il nostro segreto sta nella scelta di farine selezionate e in un processo di lievitazione lenta che regala un impasto incredibilmente **soffice, leggero e altamente digeribile**.
+                    </p>
+                    <p class="text-stone-300 leading-relaxed font-light">
+                        Che tu scelga la tradizione delle nostre pizze classiche, la creatività delle gourmet o la sicurezza delle nostre proposte **Senza Glutine**, troverai sempre prodotti freschissimi di prima qualità e un'ottima selezione per soddisfare ogni palato.
+                    </p>
+
+                    <!-- Features List -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-stone-800">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-gold mt-1"></i>
+                            <span class="text-sm text-stone-200">Impasti a lunga lievitazione</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-gold mt-1"></i>
+                            <span class="text-sm text-stone-200">Ingredienti locali d'eccellenza</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-gold mt-1"></i>
+                            <span class="text-sm text-stone-200">Massima cura per il Gluten Free</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-gold mt-1"></i>
+                            <span class="text-sm text-stone-200">Ambiente accogliente con veranda</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE MENU SECTION -->
+    <section id="menu" class="py-20 bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-brand-gold text-xs font-bold uppercase tracking-widest block mb-2">Il Nostro Menu</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mb-4">Gusto Unico in Ogni Spicchio</h2>
+                <p class="text-stone-400">Sfoglia le nostre specialità prepared al momento con ingredienti freschi e genuini.</p>
+                
+                <!-- Category Filter Buttons -->
+                <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mt-8">
+                    <button onclick="filterMenu('all')" class="menu-tab-btn active bg-brand-red text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-full shadow-md transition-all">
+                        Tutte le Pizze
+                    </button>
+                    <button onclick="filterMenu('classiche')" class="menu-tab-btn bg-stone-800 text-stone-300 hover:text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-full transition-all">
+                        Classiche
+                    </button>
+                    <button onclick="filterMenu('gourmet')" class="menu-tab-btn bg-stone-800 text-stone-300 hover:text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-full transition-all">
+                        Gourmet Speciali
+                    </button>
+                    <button onclick="filterMenu('gluten-free')" class="menu-tab-btn bg-stone-800 text-emerald-400 hover:text-emerald-300 text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-full border border-emerald-900 transition-all flex items-center gap-1.5">
+                        <i class="fa-solid fa-wheat-awn-circle-exclamation"></i> Senza Glutine
+                    </button>
+                    <button onclick="filterMenu('fritti')" class="menu-tab-btn bg-stone-800 text-stone-300 hover:text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-full transition-all">
+                        Fritti & Sfizi
+                    </button>
+                </div>
+            </div>
+
+            <!-- Menu Items Grid -->
+            <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Pizza Classica 1 -->
+                <div class="pizza-card menu-item classiche bg-brand-card border border-stone-800 rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start gap-2 mb-2">
+                            <h3 class="font-serif text-xl font-bold text-white">Margherita D.O.P.</h3>
+                            <span class="text-brand-gold font-bold font-serif text-lg">€7,00</span>
+                        </div>
+                        <p class="text-stone-400 text-sm mb-4">Pomodoro San Marzano, Mozzarella di Bufala Campana DOP, basilico fresco, olio EVO.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-stone-800/60 text-xs text-stone-500">
+                        <span><i class="fa-solid fa-leaf text-emerald-500"></i> Vegetariana</span>
+                        <span class="text-emerald-400 font-medium"><i class="fa-solid fa-check"></i> Disp. Senza Glutine</span>
+                    </div>
+                </div>
+
+                <!-- Pizza Gourmet 1 -->
+                <div class="pizza-card menu-item gourmet bg-brand-card border border-brand-gold/30 rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-brand-gold text-stone-950 font-bold text-[10px] uppercase px-3 py-1 rounded-bl-lg">
+                        Specialità
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-start gap-2 mb-2">
+                            <h3 class="font-serif text-xl font-bold text-white">La Fornarina Speciale</h3>
+                            <span class="text-brand-gold font-bold font-serif text-lg">€13,50</span>
+                        </div>
+                        <p class="text-stone-400 text-sm mb-4">Mozzarella fior di latte, crema di pistacchio di Bronte, mortadella IGP, stracciatella di bufala e granella di pistacchio.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-stone-800/60 text-xs text-stone-500">
+                        <span class="text-brand-gold"><i class="fa-solid fa-crown"></i> Chef Choice</span>
+                        <span class="text-emerald-400 font-medium"><i class="fa-solid fa-check"></i> Disp. Senza Glutine</span>
+                    </div>
+                </div>
+
+                <!-- Pizza Classica 2 -->
+                <div class="pizza-card menu-item classiche bg-brand-card border border-stone-800 rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start gap-2 mb-2">
+                            <h3 class="font-serif text-xl font-bold text-white">Diavola Saporita</h3>
+                            <span class="text-brand-gold font-bold font-serif text-lg">€8,50</span>
+                        </div>
+                        <p class="text-stone-400 text-sm mb-4">Pomodoro, fior di latte, salame piccante rigatino, nduja calabra e origano fresco.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-stone-800/60 text-xs text-stone-500">
+                        <span class="text-brand-red"><i class="fa-solid fa-pepper-hot"></i> Piccante</span>
+                        <span class="text-emerald-400 font-medium"><i class="fa-solid fa-check"></i> Disp. Senza Glutine</span>
+                    </div>
+                </div>
+
+                <!-- Pizza Gluten Free Highlight -->
+                <div id="gluten-free" class="pizza-card menu-item gluten-free bg-gradient-to-br from-stone-900 to-emerald-950/40 border border-emerald-600/40 rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start gap-2 mb-2">
+                            <h3 class="font-serif text-xl font-bold text-emerald-300 flex items-center gap-2">
+                                <i class="fa-solid fa-wheat-awn-circle-exclamation text-emerald-400"></i> Gluten Free Parmigiana
+                            </h3>
+                            <span class="text-emerald-400 font-bold font-serif text-lg">€10,50</span>
+                        </div>
+                        <p class="text-stone-300 text-sm mb-4">Impasto dedicato 100% senza glutine, salsa di pomodoro, melanzane fritte, fiordilatte, parmigiano e basilico.</p>
+                    </div>
+                    <div class="pt-4 border-t border-emerald-900/60 flex items-center justify-between text-xs text-emerald-400 font-medium">
+                        <span><i class="fa-solid fa-shield-halved"></i> Preparazione in area dedicata</span>
+                        <span class="bg-emerald-950 px-2 py-1 rounded border border-emerald-800">100% Sicuro</span>
+                    </div>
+                </div>
+
+                <!-- Pizza Gourmet 2 -->
+                <div class="pizza-card menu-item gourmet bg-brand-card border border-stone-800 rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start gap-2 mb-2">
+                            <h3 class="font-serif text-xl font-bold text-white">Sapore di Sicilia</h3>
+                            <span class="text-brand-gold font-bold font-serif text-lg">€12,00</span>
+                        </div>
+                        <p class="text-stone-400 text-sm mb-4">Salsa di pomodoro giallo, fior di latte, filetto di tonno fresco, cipolla rossa caramellata di Tropea e mollica tostata.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-stone-800/60 text-xs text-stone-500">
+                        <span><i class="fa-solid fa-fish text-blue-400"></i> Tipicità Siciliana</span>
+                        <span class="text-emerald-400 font-medium"><i class="fa-solid fa-check"></i> Disp. Senza Glutine</span>
+                    </div>
+                </div>
+
+                <!-- Fritti -->
+                <div class="pizza-card menu-item fritti bg-brand-card border border-stone-800 rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start gap-2 mb-2">
+                            <h3 class="font-serif text-xl font-bold text-white">Misto Fritti Siciliani</h3>
+                            <span class="text-brand-gold font-bold font-serif text-lg">€6,50</span>
+                        </div>
+                        <p class="text-stone-400 text-sm mb-4">Arancinetti al ragù e al pistacchio, crocchette di patate della casa, panelle dorate e verdure in pastella.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-stone-800/60 text-xs text-stone-500">
+                        <span><i class="fa-solid fa-utensils"></i> Sfizio Antipasto</span>
+                        <span>Croccanti e caldi</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Gluten Free Banner Info -->
+            <div class="mt-12 bg-emerald-950/40 border border-emerald-800/60 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 rounded-full bg-emerald-900/60 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-3xl shrink-0">
+                        <i class="fa-solid fa-wheat-awn-circle-exclamation"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-serif text-xl font-bold text-white">Attenzione Speciale alle Intolleranze e Celiachia</h3>
+                        <p class="text-stone-300 text-sm mt-1">
+                            Tutte le nostre pizze sono disponibili anche in versione **Senza Glutine**. Poniamo la massima attenzione nella preparazione per evitare contaminazioni e garantirti la stessa soffice bontà in totale sicurezza!
+                        </p>
+                    </div>
+                </div>
+                <a href="tel:+390922000000" class="shrink-0 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-3 rounded-xl transition-all text-sm">
+                    Informazioni Allergeni
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- AMBIENTI E SALE -->
+    <section id="sale" class="py-20 bg-stone-900 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-gold text-xs font-bold uppercase tracking-widest block mb-2">Accoglienza & Comfort</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mb-4">Dove Gustare la Nostra Pizza</h2>
+                <p class="text-stone-400">Ambienti spaziosi e curati per la tua cena in famiglia, con gli amici o per eventi speciali.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Sala Interna -->
+                <div class="bg-stone-950 border border-stone-800 rounded-2xl overflow-hidden group hover:border-brand-gold/40 transition-all">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=800&auto=format&fit=crop" alt="Sala Interna Pizzeria" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-transparent"></div>
+                        <span class="absolute bottom-4 left-4 bg-brand-dark/80 backdrop-blur-md text-brand-gold text-xs font-bold px-3 py-1.5 rounded-lg border border-stone-700">
+                            <i class="fa-solid fa-couch"></i> Climatizzata
+                        </span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-serif text-2xl font-bold text-white mb-2">Sala Interna Accogliente</h3>
+                        <p class="text-stone-400 text-sm leading-relaxed mb-4">
+                            Un ambiente caldo, curato nei dettagli e ideale per le serate invernali. Tavoli comodi e un'atmosfera conviviale ti faranno sentire subito a casa tua.
+                        </p>
+                        <div class="flex items-center text-xs text-brand-gold gap-2 font-medium">
+                            <i class="fa-solid fa-users"></i> Ideale per gruppi e famiglie
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Veranda Esterna -->
+                <div class="bg-stone-950 border border-stone-800 rounded-2xl overflow-hidden group hover:border-brand-gold/40 transition-all">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?q=80&w=800&auto=format&fit=crop" alt="Veranda Esterna Coperta" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-transparent"></div>
+                        <span class="absolute bottom-4 left-4 bg-brand-dark/80 backdrop-blur-md text-brand-gold text-xs font-bold px-3 py-1.5 rounded-lg border border-stone-700">
+                            <i class="fa-solid fa-umbrella-beach"></i> Coperta e Riscaldata/Ventilata
+                        </span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-serif text-2xl font-bold text-white mb-2">Sala Esterna Coperta (Veranda)</h3>
+                        <p class="text-stone-400 text-sm leading-relaxed mb-4">
+                            Goditi le tue serate all'aperto nella nostra spaziosa veranda coperta. Perfettamente vivibile durante le belle serate estive e riparata per garantire il massimo comfort.
+                        </p>
+                        <div class="flex items-center text-xs text-brand-gold gap-2 font-medium">
+                            <i class="fa-solid fa-sun"></i> Perfetta per la bella stagione
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ORDINA ONLINE & PIZZA TAXI -->
+    <section class="py-20 bg-gradient-to-b from-stone-900 to-brand-dark border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-stone-900/90 border border-stone-800 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10">
+                    
+                    <div>
+                        <span class="text-brand-gold text-xs font-bold uppercase tracking-widest block mb-2">Consegna a Domicilio & Asporto</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mb-4">Vuoi gustarla comodamente sul tuo divano?</h2>
+                        <p class="text-stone-300 text-base mb-6 leading-relaxed">
+                            Con il nostro servizio **Pizza Taxi** la tua pizza arriva calda, fragrante e puntuale direttamente a casa tua a Licata. Oppure ordina subito online tramite **Just Eat**!
+                        </p>
+
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <!-- Just Eat Link -->
+                            <a href="https://www.just-eat.it" target="_blank" rel="noopener" class="bg-brand-justeat hover:bg-orange-600 text-white font-bold px-6 py-4 rounded-xl transition-all shadow-lg flex items-center justify-center gap-3">
+                                <i class="fa-solid fa-bag-shopping text-xl"></i>
+                                <div class="text-left">
+                                    <span class="block text-[10px] uppercase opacity-80">Ordina Subito su</span>
+                                    <span class="text-base font-extrabold leading-none">JUST EAT</span>
+                                </div>
+                            </a>
+
+                            <!-- Pizza Taxi / Phone Call -->
+                            <a href="tel:+390922000000" class="bg-brand-red hover:bg-red-700 text-white font-bold px-6 py-4 rounded-xl transition-all shadow-lg flex items-center justify-center gap-3">
+                                <i class="fa-solid fa-phone text-xl"></i>
+                                <div class="text-left">
+                                    <span class="block text-[10px] uppercase opacity-80">Chiama Pizza Taxi</span>
+                                    <span class="text-base font-extrabold leading-none">0922 123456</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-stone-950 p-6 rounded-2xl border border-stone-800 text-center">
+                        <i class="fa-solid fa-motorcycle text-5xl text-brand-gold mb-4"></i>
+                        <h3 class="text-xl font-serif font-bold text-white mb-2">Servizio Pizza Taxi Fast</h3>
+                        <p class="text-xs text-stone-400 mb-4">
+                            Consegne veloci su tutto il territorio di Licata. Zaini termici di ultima generazione per preservare il calore e la morbidezza dell'impasto.
+                        </p>
+                        <div class="inline-block bg-stone-900 border border-stone-800 text-stone-300 text-xs px-4 py-2 rounded-lg">
+                            <i class="fa-solid fa-clock text-brand-gold"></i> Attivo Mar - Dom dalle 17:00 in poi
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER E CONTATTI -->
+    <footer id="contatti" class="bg-stone-950 text-stone-400 pt-16 pb-8 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                
+                <!-- Col 1: Brand -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-brand-red/20 border border-brand-gold/40 flex items-center justify-center text-brand-gold text-xl">
+                            <i class="fa-solid fa-pizza-slice"></i>
+                        </div>
+                        <span class="font-serif text-xl font-bold text-white">LA FORNARINA</span>
+                    </div>
+                    <p class="text-xs text-stone-400 leading-relaxed mb-4">
+                        La pizza più buona e soffice di Licata. Ingredienti di prima scelta, pizze classiche, gourmet e opzioni 100% Senza Glutine.
+                    </p>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-9 h-9 rounded-full bg-stone-900 hover:bg-brand-gold hover:text-black text-stone-300 flex items-center justify-center transition-colors">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-stone-900 hover:bg-brand-gold hover:text-black text-stone-300 flex items-center justify-center transition-colors">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-stone-900 hover:bg-brand-gold hover:text-black text-stone-300 flex items-center justify-center transition-colors">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Orari -->
+                <div>
+                    <h4 class="font-serif text-white font-bold text-lg mb-4 flex items-center gap-2">
+                        <i class="fa-regular fa-clock text-brand-gold"></i> Orari di Apertura
+                    </h4>
+                    <ul class="text-xs space-y-2.5">
+                        <li class="flex justify-between py-1 border-b border-stone-900 text-brand-red font-semibold">
+                            <span>Lunedì:</span>
+                            <span>CHIUSO</span>
+                        </li>
+                        <li class="flex justify-between py-1 border-b border-stone-900">
+                            <span>Martedì:</span>
+                            <span>17:00 - 23:30</span>
+                        </li>
+                        <li class="flex justify-between py-1 border-b border-stone-900">
+                            <span>Mercoledì:</span>
+                            <span>17:00 - 23:30</span>
+                        </li>
+                        <li class="flex justify-between py-1 border-b border-stone-900">
+                            <span>Giovedì:</span>
+                            <span>17:00 - 23:30</span>
+                        </li>
+                        <li class="flex justify-between py-1 border-b border-stone-900">
+                            <span>Venerdì:</span>
+                            <span>17:00 - 00:00</span>
+                        </li>
+                        <li class="flex justify-between py-1 border-b border-stone-900">
+                            <span>Sabato:</span>
+                            <span>17:00 - 00:30</span>
+                        </li>
+                        <li class="flex justify-between py-1">
+                            <span>Domenica:</span>
+                            <span>17:00 - 00:00</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Dove Siamo & Contatti -->
+                <div>
+                    <h4 class="font-serif text-white font-bold text-lg mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot text-brand-gold"></i> Contatti & Sede
+                    </h4>
+                    <ul class="text-xs space-y-3">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-map-pin text-brand-gold mt-1"></i>
+                            <span>Via Vittorio Emanuele / Centro Storico<br>92027 Licata (AG), Sicilia</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-brand-gold"></i>
+                            <a href="tel:+390922000000" class="hover:text-white transition-colors">0922 123456</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-brands fa-whatsapp text-emerald-500"></i>
+                            <a href="https://wa.me/390922000000" class="hover:text-white transition-colors">+39 340 0000000</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-brand-gold"></i>
+                            <span>info@pizzerialafornarina.it</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Mappa Estetica -->
+                <div>
+                    <h4 class="font-serif text-white font-bold text-lg mb-4">Dove Trovarci</h4>
+                    <div class="rounded-xl overflow-hidden border border-stone-800 h-36 bg-stone-900 relative flex items-center justify-center text-center p-4">
+                        <div class="space-y-2">
+                            <i class="fa-solid fa-map-location-dot text-3xl text-brand-gold"></i>
+                            <p class="text-xs text-stone-300 font-medium">Licata (AG) - Sicilia</p>
+                            <a href="https://maps.google.com" target="_blank" class="inline-block text-[11px] bg-stone-800 hover:bg-stone-700 text-brand-gold font-semibold px-3 py-1 rounded transition-colors">
+                                Apri in Google Maps
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="pt-8 border-t border-stone-900 text-center text-xs text-stone-500 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p>&copy; 2026 Pizzeria La Fornarina - Licata (AG). Tutti i diritti riservati.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-stone-400">Privacy Policy</a>
+                    <a href="#" class="hover:text-stone-400">Cookie Policy</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT PER LOGICA FILTRI E MENU MOBILE -->
+    <script>
+        // Toggle Mobile Menu
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Filter Interactive Menu
+        function filterMenu(category) {
+            const items = document.querySelectorAll('.menu-item');
+            const buttons = document.querySelectorAll('.menu-tab-btn');
+
+            // Update Active Button Style
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-brand-red', 'text-white');
+                btn.classList.add('bg-stone-800', 'text-stone-300');
+            });
+
+            event.currentTarget.classList.remove('bg-stone-800', 'text-stone-300');
+            event.currentTarget.classList.add('bg-brand-red', 'text-white');
+
+            // Filter Items
+            items.forEach(item => {
+                if (category === 'all') {
+                    item.style.display = 'flex';
+                } else if (item.classList.contains(category)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
